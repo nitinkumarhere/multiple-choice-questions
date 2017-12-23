@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1> Create Question</h1>
+<form action="{% url 'mcq:create-question' %}" method="post">
+{% csrf_token %}
+
+{% for field in qform %}
+    <div class="fieldWrapper">
+        {{ field.errors }}
+        {{ field.label_tag }} {{ field }}
+        {% if field.help_text %}
+        <p class="help">{{ field.help_text|safe }}</p>
+        {% endif %}
+    </div>
+{% endfor %}
+
+{% for field in cform %}
+    <div class="fieldWrapper">
+        {{ field.errors }}
+        {{ field.label_tag }} {{ field }}
+        {% if field.help_text %}
+        <p class="help">{{ field.help_text|safe }}</p>
+        {% endif %}
+         </div>
+{% endfor %}
+
+<input type="submit" value="Submit"/>
+
+{% endblock %}
+

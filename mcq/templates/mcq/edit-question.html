@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1> Edit Question </h1>
+<form action="{% url 'mcq:edit-question' question.pk %}" method="post">
+{% csrf_token %}
+
+
+{% for field in qform %}
+    <div class="fieldWrapper">
+        {{ field.errors }}
+        {{ field.label_tag }} {{ field }}
+        {% if field.help_text %}
+        {{ field.help_text|safe }}
+        {% endif %}
+    </div>
+{% endfor %}
+
+
+{{ formset.management_form }}
+{% for form in formset %}
+<div class="fieldWrapper">
+        {{ form.errors }}
+        {{ form.label_tag }} {{ form }}
+        {% if form.help_text %}
+        {{ form.help_text|safe }}
+        {% endif %}
+</div>
+{% endfor %}
+<input type="submit" value="Submit"/>
+
+
+{% endblock %}

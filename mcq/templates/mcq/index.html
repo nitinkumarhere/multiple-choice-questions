@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block content %}
+{% if papers %}
+	<h2>Solve Papers</h2>
+	<ul>
+	{% for paper in papers %}
+		<li><a href= "{% url 'mcq:paper' paper.id %}">{{ paper.title }}</a><a href="{% url 'mcq:delete-paper' paper.id %}">Delete</a></li>
+	{% endfor %}
+	</ul>
+{%else %}
+	<p>No papers available.</p>
+{% endif %}
+{% endblock %}

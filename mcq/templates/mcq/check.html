@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% load mcq_extras %}
+
+{% block content %}
+
+<h1> {{ paper.title }}</h1>
+
+{% csrf_token %}
+
+
+{% for qform in question_forms %}
+    <table>
+        <tr><td>{{ qform.question.text }} </td></tr>
+    {{ qform.as_table }}
+
+    </table>
+        {% if correctly_answered|get_item:qform.question.id %}
+            &#10003; Correct
+        {% else %}
+            &#10005; Wrong
+        {% endif %}
+
+<hr>
+</hr>
+
+{% endfor %}
+
+{% endblock %}
+
+

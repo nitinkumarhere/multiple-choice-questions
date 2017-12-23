@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1> {{ paper.title }}</h1>
+
+
+<form action="{% url 'mcq:check' paper.id %}" method="post">
+{% csrf_token %}
+{% for question in questions %}
+<ul>
+    {{ question.text }}
+    {% for choice in question.choices.all %}
+    <ul>
+        <input type="checkbox" name="choice" id = "choice{{ forloop.counter }}" value="{{ choice.id }}" >
+	    <label for="choice{{ forloop.counter }}">{{ choice }} </label>
+
+    </ul>
+    {% endfor %}
+</ul>
+{% endfor %}
+<input type="submit" value="Check"/>
+</form>
+
+{% endblock %}
+

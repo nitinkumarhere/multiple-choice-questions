@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h1> {{ paper.title }}</h1>
+
+<form action="{% url 'mcq:check' paper.id %}" method="post">
+{% csrf_token %}
+
+    <table>
+{% for qform in question_forms %}
+        <tr><td>{{ qform.question.text }} </td></tr>
+    {{ qform.as_table }}
+{% endfor %}
+    </table>
+
+
+
+<input type="submit" value="Check"/>
+</form>
+
+{% endblock %}
+
+
+
+

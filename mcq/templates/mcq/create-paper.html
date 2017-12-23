@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1> Create Question Paper</h1>
+<form action="{% url 'mcq:create-paper' %}" method="post">
+{% csrf_token %}
+
+
+    <div class="fieldWrapper">
+        {{ form.title.errors }}
+        {{ form.title.label_tag }} {{ form.title }}
+        {% if form.title.help_text %}
+        <p class="help">{{ form.title.help_text|safe }}</p>
+        {% endif %}
+    </div>
+
+    <ul id="id_{{ field.question }}">
+        {% for pk, question in form.questions.field.widget.choices %}
+           <li>
+                <label for="id_{{field.name}}_{{ forloop.counter0 }}">
+                <input id="id_{{field.name}}_{{ forloop.counter0 }}" name="{{field.name}}" type="checkbox" value="{{pk}}" />
+                {{ question }}  <a href="{% url 'mcq:edit-question' pk %}">Edit</a> <a href="{% url 'mcq:delete-question' pk %}">Delete</a>
+                </label>
+            </li>
+        {% endfor %}
+    </ul>
+
+<input type="submit" value="Submit"/>
+
+{% endblock %}
+

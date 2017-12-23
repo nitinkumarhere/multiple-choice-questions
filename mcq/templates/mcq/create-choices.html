@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1> Create Choices</h1>
+<form action="{% url 'mcq:create-choices' question.pk %}" method="post">
+{% csrf_token %}
+        {{ formset.management_form }}
+        {% for form in formset %}
+            <div class="fieldWrapper">
+                {{ form.errors }}
+                {{ form.label_tag }} {{ form }}
+                {% if form.help_text %}
+                <p class="help">{{ form.help_text|safe }}</p>
+                {% endif %}
+            </div>
+        {% endfor %}
+
+
+<input type="submit" value="Submit"/>
+
+{% endblock %}
+
