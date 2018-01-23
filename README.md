@@ -5,14 +5,14 @@ App for multiple choice questions
 # create virtualenv
 virtualenv env
 
-#activate env
+# activate env
 source env/bin/activate
 
-#install requirements
+# install requirements
 pip install -r requirements.txt
 
 
-#clone git repository
+# clone git repository
 git clone git@github.com:enkaynitin/multiple-choice-questions.git
 
 
